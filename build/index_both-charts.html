@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+</head>
+<body>
+	<div class="background">
+		<div class="transbox">
+			<div class="foreground">
+				<select name="station" id="station"></select>
+				<svg class="chart"></svg>
+			</div>
+		</div>
+	</div>
+	<script>
+
+	d3.json('/api/station', function(err, data) {
+		console.log(data);
+		var station = d3.select("#station");
+		station.on("change", function() {
+			if(this.value) {
+				renderChart(this.value);
+			}
+		});
+		station.append("option")
+			.attr("value", "")
+			.text("Select a Station...");
+		station.selectAll("option.station")
+			.data(data)
+			.enter().append("option")
+			.attr("value", function(d) { return d.station; })
+			.text(function(d) { return d.stationTitle; })
+			.attr("class", "station");
+	});
+
+	var margin = {top: 20, right: 20, bottom: 30, left: 100},
+		width = 960 - margin.left - margin.right,
+		height = 500 - margin.top - margin.bottom;
+
+	var y = d3.scale.linear()
+		.range([height, 0]);
+	var x = d3.time.scale()
+		.range([0, width]);
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left");
+	var line = d3.svg.line()
+		.x(function(d) { return x(d.date); })
+		.y(function(d) { return y(d.value); });
+	var chart = d3.select(".chart")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	function renderChart(stationID) {
+		d3.json('/api/station/' + 'PLACHECO', function(err, data) {
+			var discharge1 = data.discharge;
+			d3.json('/api/station/' + 'PLAHARCO', function(err, data) {
+				var discharge = data.discharge;
+				var maxDate = d3.max(discharge, function(d) { return d.date; });// maxDate - 8640000 to get one day back?
+				y.domain(d3.extent(discharge.concat(discharge1), function(d) { return d.value; }));
+				x.domain(d3.extent(discharge, function(d) { return d.date; }));
+				chart.selectAll(".axis, path").remove();
+				chart.append("g")
+					.attr("class", "x axis")
+					.attr("transform", "translate(0," + height + ")")
+					.call(xAxis);
+
+				chart.append("g")
+					.attr("class", "y axis")
+					.call(yAxis)
+				  .append("text")
+					.attr("transform", "translate(-75,"+(height/2)+")rotate(-90)")
+					.attr("y", 6)
+					.attr("dy", ".71em")
+					.style("text-anchor", "end")
+					.text("Discharge (cfs)");
+
+				chart.selectAll("path.line").data([discharge, discharge1])
+					.enter().append("path")
+					.attr("class", "line")
+					.attr("d", line);
+			});
+		});
+	}
+
+	function type(d) {
+		d.value = +d.value; // coerce to number
+		return d;
+	}
+	</script>
+</body>
+</html>

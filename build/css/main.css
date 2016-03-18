@@ -1,0 +1,79 @@
+body {
+	font: 10px sans-serif;
+}
+.background:before {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	/*background-image: url('https://ununsplash.imgix.net/reserve/m6rT4MYFQ7CT8j9m2AEC_JakeGivens%20-%20Sunset%20in%20the%20Park.JPG?dpr=2&fit=crop&fm=jpg&h=625&q=75&w=950');*/
+	background-image: url('https://images.unsplash.com/photo-1450529130404-28cc74958a81?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=0e4c6751942aadadaed719244fa380fd');
+	background-size: cover;
+	opacity: 0.5;
+	z-index: -1;
+}
+.title {
+	padding: 2em 0 3em 0;
+	background-color: #6A8DA6;
+}
+.title h1 {
+	padding-left: 1em;
+	font-family: 'Russo One', sans-serif;
+	font-size: 3em;
+}
+select {
+	font: 16px sans-serif;
+	margin: 1em;
+}
+.chart {
+	/*background-color: #CAB790;*/
+}
+.chart-background {
+	fill: rgba(255, 255, 255, .75);
+}
+a {
+	/*Typography Declarations*/
+	color: #6A8DA6;
+	font-weight: bold;
+	text-decoration: none;
+}
+#footer {
+	background-color: #485927;/*Was: #4E4C59*/
+	padding: 4em 0;
+}
+#content-footer {
+	max-width: 38em;
+	margin: 2em ;
+	clear: both;
+}
+#content-footer > p {
+	/*Typography Declarations*/
+	font-weight: 300;
+	letter-spacing: 0.05em;
+}
+#content-footer a:visited,
+#content-footer a:hover {
+	color: #C3DBF0;
+}
+#content-footer > p {
+	color: white;
+}
+#photoCredit {
+	margin-top: 40px;
+	font-size: 0.85em;
+}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+.x.axis path {
+	display: none;
+}
+.line {
+	fill: #4B6473;
+	stroke: #4B6473;
+	stroke-width: 1.5px;
+}

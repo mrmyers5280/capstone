@@ -9,7 +9,7 @@
   },
   "author": "not.that.mike.myers@gmail.com",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
 	"body-parser": "^1.14.2",
 	"csv-parse": "^1.0.1",
 	"express": "^4.13.4",

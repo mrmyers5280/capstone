@@ -11,7 +11,7 @@ var mongoose = require('mongoose');
 var Station = require('./app/models/station');
 
 // connect to our database
-mongoose.connect('mongodb://mongo:mongo@ds051665.mongolab.com:51665/node_express_tutorial');
+mongoose.connect(process.env.MONGOLAB_URI);
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST

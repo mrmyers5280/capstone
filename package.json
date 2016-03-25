@@ -4,16 +4,20 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+	"test": "echo \"Error: no test specified\" && exit 1",
+	"start": "node server.js"
   },
   "author": "not.that.mike.myers@gmail.com",
   "license": "ISC",
   "devDependencies": {
-    "body-parser": "^1.14.2",
-    "csv-parse": "^1.0.1",
-    "express": "^4.13.4",
-    "mongoose": "^4.4.2",
-    "request": "^2.69.0",
-    "yargs": "^3.32.0"
+	"body-parser": "^1.14.2",
+	"csv-parse": "^1.0.1",
+	"express": "^4.13.4",
+	"mongoose": "^4.4.2",
+	"request": "^2.69.0",
+	"yargs": "^3.32.0"
+  },
+  "engines": {
+	"node": "0.12.4"
   }
 }

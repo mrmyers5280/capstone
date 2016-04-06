@@ -22,6 +22,9 @@ body {
 	font-size: 3em;
 	color: #fff
 }
+.title h2 {
+	margin-left: 2em;
+}
 select {
 	font: 16px sans-serif;
 	margin: 1em;
